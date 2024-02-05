@@ -1,0 +1,40 @@
+@model SuperCarBookingSystem.Models.Car
+@{
+    ViewData["Title"] = "Add Car";
+}
+
+<h2>Create a new car</h2>
+<hr />
+
+
+@if (ViewData["ErrorMessage"] != null)
+{
+    <p class="text-danger">@ViewData["ErrorMessage"]</p>
+}
+
+<form asp-action="Add">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Model" class="form-label"></label>
+        <input asp-for="Model" class="form-control" />
+        <span asp-validation-for="Model" class="text-danger"></span>
+    </div>
+
+
+    <div class="mb-3">
+        <label asp-for="NumberPlate" class="form-label"></label>
+        <input asp-for="NumberPlate" class="form-control" />
+        <span asp-validation-for="NumberPlate" class="text-danger"></span>
+    </div>
+
+
+    <div class="mb-3">
+        <label asp-for="Location" class="form-label"></label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+
+
+    <input type="submit" value="Add car" class="btn btn-primary" />
+</form>

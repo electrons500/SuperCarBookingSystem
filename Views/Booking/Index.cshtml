@@ -1,0 +1,48 @@
+@model IEnumerable<SuperCarBookingSystem.Models.Booking>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@TempData["Message"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<br />
+<p>
+    <a href="@Url.Action("Index","Car")" class="btn btn-primary">Back to Car list</a>
+</p>
+<table class="table table-condensed table-bordered">
+    <tr class="table-dark">
+        <th>
+            Booked Car
+        </th>
+        <th>
+            Start Date
+        </th>
+        <th>
+            End Date
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+
+    @foreach (var booking in Model)
+    {
+        <tr>
+            <td>@booking.CarModel</td>
+            <td>@booking.StartDate</td>
+            <td>@booking.EndDate</td>
+            <td>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@booking.Id.ToString()">Edit</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@booking.Id.ToString()">Delete</a>
+            </td>
+        </tr>
+    }
+
+
+</table>

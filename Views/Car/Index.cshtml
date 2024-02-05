@@ -1,0 +1,52 @@
+@model IEnumerable<SuperCarBookingSystem.Models.Car>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@TempData["Message"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<br>
+
+<p>
+    <a class="btn btn-primary" asp-action="Add">Add new car</a>
+</p>
+<table class="table table-condensed table-bordered">
+    <tr class="table-dark">
+        <th>
+            Model
+        </th>
+        <th>
+            Number Plate
+        </th>
+        <th>
+            Location
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+    @foreach (var car in Model)
+    {
+        <tr>
+            <td>@car.Model</td>
+            <td>@car.NumberPlate</td>
+            <td>@car.Location</td>
+            <td>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@car.Id.ToString()">Edit</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@car.Id.ToString()">Delete</a>
+                @if (!car.IsBooked)
+                {
+                    <a class="btn btn-success" asp-controller="Booking" asp-action="Add"
+                        asp-route-carId="@car.Id.ToString()">Book</a>
+                }
+            </td>
+        </tr>
+    }
+
+</table>
